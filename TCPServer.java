@@ -39,9 +39,11 @@ class TCPServer {
     		   PrintWriter outToClient = new PrintWriter(connectionSocket.getOutputStream(),true);
 
            clientSentence = inFromClient.readLine();
-
            capitalizedSentence = clientSentence.toUpperCase();
+           outToClient.println(capitalizedSentence);
 
+           clientSentence = inFromClient.readLine();
+           capitalizedSentence = clientSentence.toUpperCase();
            outToClient.println(capitalizedSentence);
         }
     }

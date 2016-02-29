@@ -32,15 +32,19 @@ class TCPClient {
 			System.exit(0);
 		}
 
-        PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(),true); 
+        PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(),true);
 		    BufferedReader inFromServer =  new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
+        System.out.print("First Sentence: ");
         sentence = inFromUser.readLine();
-
         outToServer.println(sentence);
-
         modifiedSentence = inFromServer.readLine();
+        System.out.println("FROM SERVER: " + modifiedSentence);
 
+        System.out.print("Second Sentence: ");
+        sentence = inFromUser.readLine();
+        outToServer.println(sentence);
+        modifiedSentence = inFromServer.readLine();
         System.out.println("FROM SERVER: " + modifiedSentence);
 
         clientSocket.close();
