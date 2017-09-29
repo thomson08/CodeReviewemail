@@ -17,7 +17,7 @@ class TCPServer {
 
   public static void main(String argv[]) throws Exception
     {
-		String welcomeMessage = "Welcome\n";	
+		String welcomeMessage = "Welcome";	
 	  	String clientSentence;
 		String capitalizedSentence;
 
@@ -45,11 +45,15 @@ class TCPServer {
            outToClient.println(welcomeMessage);
 	      
 	   clientSentence = inFromClient.readLine();
+	   System.out.println(clientSentence);
            capitalizedSentence = clientSentence.toUpperCase();
+	   System.out.println(capitalizedSentence);
            outToClient.println(capitalizedSentence);
 
            clientSentence = inFromClient.readLine();
+	   System.out.println(clientSentence);
            capitalizedSentence = clientSentence.toUpperCase();
+	   System.out.println(capitalizedSentence);
            outToClient.println(capitalizedSentence);
         }
     }

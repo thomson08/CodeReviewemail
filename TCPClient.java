@@ -16,6 +16,8 @@ class TCPClient {
     {
         String sentence;
         String modifiedSentence;
+	String welcomeMessage;
+
 
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 
@@ -33,7 +35,11 @@ class TCPClient {
 		}
 
         PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(),true);
-		    BufferedReader inFromServer =  new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        BufferedReader inFromServer =  new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+        welcomeMessage = inFromServer.readLine();
+        System.out.println("FROM SERVER:" + welcomeMessage);
+
 
         System.out.print("First Sentence: ");
         sentence = inFromUser.readLine();
