@@ -5,6 +5,9 @@
 *	Returns an upper case version of the line to the client
 *
 *	@author: Michael Fahy
+*	ID:	14508
+*	Email:	fahy@chapman.edu
+*	Date:	9/12/2017
 @	version: 2.0
 */
 import java.io.*;
@@ -14,7 +17,8 @@ class TCPServer {
 
   public static void main(String argv[]) throws Exception
     {
-		String clientSentence;
+		String welcomeMessage = "Welcome\n";	
+	  	String clientSentence;
 		String capitalizedSentence;
 
 		ServerSocket welcomeSocket = null;
@@ -36,9 +40,11 @@ class TCPServer {
            Socket connectionSocket = welcomeSocket.accept();
 
            BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
-    		   PrintWriter outToClient = new PrintWriter(connectionSocket.getOutputStream(),true);
+           PrintWriter outToClient = new PrintWriter(connectionSocket.getOutputStream(),true);
 
-           clientSentence = inFromClient.readLine();
+           outToClient.println(welcomeMessage);
+	      
+	   clientSentence = inFromClient.readLine();
            capitalizedSentence = clientSentence.toUpperCase();
            outToClient.println(capitalizedSentence);
 
