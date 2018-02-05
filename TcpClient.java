@@ -1,7 +1,7 @@
 /**
 *  TCP Client Program
 *  Connects to a TCP Server
-* Waits for a Welcome message from teh server
+*  Waits for a Welcome message from the server
 *  Receives a line of input from the keyboard and sends it to the server
 *  Receives a response from the server and displays it.
 *  Receives a second line of input from the keyboard and sends it to the server
