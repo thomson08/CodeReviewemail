@@ -12,14 +12,14 @@ In the Email.java pogram,
 
 Your program shuld display all the SMTP commands that you send to the server and all the responses that you receive from the server.
 
-Edit the email.input file, relacing "username" with your username and 'Screen1" and 'Screen2' with the names of yoru test sender and receiver.
+Edit the email.input file, replacing "username" with your username and 'Screen1" and 'Screen2' with the names of yoru test sender and receiver.
 
-Create a Jenkins job for the project follwing the assignmetn instructions.
+Create a Jenkins job for the project following the assignmemt instructions.
 
 For full credit, your program Must 
 + include appropriate documentation 
 + be capable of sending messages with multiple lines 
 + handle the email.input file properly
-    - i.e rn properly whe exutes as "java Email , email.input"
+    - i.e run properly whe exexuted as "java Email < email.input"
 + pass checkstyle review. 
 + pass the Jenkins build.
