@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 /**
 *  TCP Client Program
 *  Connects to a TCP Server
@@ -7,18 +11,11 @@
 *  Receives a second line of input from the keyboard and sends it to the server
 *  Receives a second response from the server and displays it.
 *  Closes the socket and exits
-*
-*  @author: Michael Fahy
+*  author: Michael Fahy
 *  Email:  fahy@chapman.edu
 *  Date:  2/4/2018
-*  @version: 3.0
+*  version: 3.0
 */
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-
-import java.net.Socket;
 
 class TcpClient {
 
@@ -32,7 +29,7 @@ class TcpClient {
       System.out.println("Failed to open socket connection");
       System.exit(0);
     }
-    PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(),true);
+    PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(), true);
     BufferedReader inFromServer =  new BufferedReader(
         new InputStreamReader(clientSocket.getInputStream()));
 

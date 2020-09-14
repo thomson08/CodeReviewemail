@@ -1,22 +1,20 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 /**
 *  TCP Server Program
 *  Listens on a TCP port
 *  Receives a line of input from a TCP client
 *  Returns an upper case version of the line to the client
-*
-*  @author: Michael Fahy
+*  author: Michael Fahy
 *  ID:  14508
 *  Email:  fahy@chapman.edu
 *  Date:  9/12/2017
-@  version: 2.0
+*  version: 2.0
 */
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-
-import java.net.ServerSocket;
-import java.net.Socket;
-
 
 class TcpServer {
 
@@ -41,7 +39,7 @@ class TcpServer {
 
       BufferedReader inFromClient = new BufferedReader(
           new InputStreamReader(connectionSocket.getInputStream()));
-      PrintWriter outToClient = new PrintWriter(connectionSocket.getOutputStream(),true);
+      PrintWriter outToClient = new PrintWriter(connectionSocket.getOutputStream(), true);
 
       outToClient.println(welcomeMessage);
 
