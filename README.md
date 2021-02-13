@@ -32,3 +32,34 @@ For full credit, your program Must
     - i.e. run properly when executed as "java Email < email.input"
 + pass checkstyle review.
 + pass the Jenkins build.
+
+Edit the text above so that it describes your Email program rather than the assignment
+Edit the text below as appropriate.
+
+## Identifying Information
+
+* Name: 
+* Student ID:
+* Email: 
+* Course: 
+* Assignment: 
+
+## Source Files
+
+* 
+
+## References
+
+* 
+
+## Known Errors
+
+*
+
+## Build Insructions
+
+* 
+
+## Execution Instructions
+
+*
