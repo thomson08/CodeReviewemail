@@ -5,10 +5,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
-*  TCP Server Program
-*  Listens on a TCP port
-*  Receives a line of input from a TCP client
-*  Returns an upper case version of the line to the client
+*  TCP Server Program.
+*  Listens on a TCP port.
+*  Receives a line of input from a TCP client.
+*  Returns an upper case version of the line to the client.
+*  Receives a second line of input from a TCP client.
+*  Returns an upper case version of the line to the client.
+*  Closes the socket connection.
 *  author: Michael Fahy
 *  ID:  14508
 *  Email:  fahy@chapman.edu
@@ -34,7 +37,7 @@ class TcpServer {
 
 
     while (true) {
-
+      System.out.println("Waiting for a client to connect.");
       Socket connectionSocket = welcomeSocket.accept();
 
       BufferedReader inFromClient = new BufferedReader(

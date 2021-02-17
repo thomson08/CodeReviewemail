@@ -3,24 +3,35 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 /**
-*  TCP Client Program
-*  Connects to a TCP Server
-*  Waits for a Welcome message from the server
-*  Receives a line of input from the keyboard and sends it to the server
+*  TCP Client Program.
+*  Receives two sentences of input from the keyboard and
+*  stores them in separate variables.
+*  Connects to a TCP Server.
+*  Waits for a Welcome message from the server.
+*  Sends the first sentence to the server.
 *  Receives a response from the server and displays it.
-*  Receives a second line of input from the keyboard and sends it to the server
+*  Sends the second sentence to the server.
 *  Receives a second response from the server and displays it.
-*  Closes the socket and exits
+*  Closes the socket and exits.
 *  author: Michael Fahy
 *  Email:  fahy@chapman.edu
-*  Date:  2/4/2018
-*  version: 3.0
+*  Date:  2/17/2021
+*  version: 3.1
 */
 
 class TcpClient {
 
   public static void main(String[] argv) throws Exception {
+    // Get user input
+    BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+    System.out.print("Type the first sentence: ");
+    final String sentence1 = inFromUser.readLine();
 
+    System.out.print("Type the second sentence: ");
+    final String sentence2 = inFromUser.readLine();
+    // Finished getting user input
+
+    // Connect to the server
     Socket clientSocket = null;
 
     try {
@@ -33,22 +44,24 @@ class TcpClient {
     BufferedReader inFromServer =  new BufferedReader(
         new InputStreamReader(clientSocket.getInputStream()));
 
+    // Exchange messages with the server
+    // Recive and display the Welcome Message
     String welcomeMessage = inFromServer.readLine();
     System.out.println("FROM SERVER:" + welcomeMessage);
 
-    System.out.print("First Sentence: ");
-    BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-    String sentence = inFromUser.readLine();
-    outToServer.println(sentence);
+    // Send the first sentence and display the response
+    System.out.println(sentence1);
+    outToServer.println(sentence1);
     String modifiedSentence = inFromServer.readLine();
     System.out.println("FROM SERVER: " + modifiedSentence);
 
-    System.out.print("Second Sentence: ");
-    sentence = inFromUser.readLine();
-    outToServer.println(sentence);
+    // Sent the second sentence and display the reponse
+    System.out.println(sentence2);
+    outToServer.println(sentence2);
     modifiedSentence = inFromServer.readLine();
     System.out.println("FROM SERVER: " + modifiedSentence);
 
+    // Close the socket connection
     clientSocket.close();
   }
 }
