@@ -1,4 +1,6 @@
 # email
+This README file describes the assignment.  You must edit it to describe your program, not th assignment.
+
 This repository contains a TcpServer.java program and a TcpClient.java program.
 These programs are similar to the original TCP client and server programs except that
 + the client will send two sentences to the server instead of just one, as you were asked to do in the Programming Assignment 0.
@@ -14,7 +16,7 @@ Your program should display all the SMTP commands that you send to the server an
 Before testing your program, make sure it passes checkstyle audit.
 
 To test your program, edit the email.input file and replace
-+ "sender_email_address" with "username@chapman.edu" wehre "username" is your actual username
++ "sender_email_address" with "username@chapman.edu" where "username" is your actual username
 + "receiver_email_address" with your email sender_email_address
 + "sender_name" with your name
 + "receiver_name" with a different version of your name
