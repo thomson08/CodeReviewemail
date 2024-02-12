@@ -19,7 +19,7 @@ import java.net.Socket;
 *  version: 3.1
 */
 
-class TcpClient {
+class email {
 
   public static void main(String[] argv) throws Exception {
     // Get user input
@@ -35,7 +35,7 @@ class TcpClient {
     Socket clientSocket = null;
 
     try {
-      clientSocket = new Socket("localhost", 6789);
+      clientSocket = new Socket("smtp.chapman.edu", 25);
     } catch (Exception e) {
       System.out.println("Failed to open socket connection");
       System.exit(0);
