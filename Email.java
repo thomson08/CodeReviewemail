@@ -2,66 +2,73 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-/**
-*  TCP Client Program.
-*  Receives two sentences of input from the keyboard and
-*  stores them in separate variables.
-*  Connects to a TCP Server.
-*  Waits for a Welcome message from the server.
-*  Sends the first sentence to the server.
-*  Receives a response from the server and displays it.
-*  Sends the second sentence to the server.
-*  Receives a second response from the server and displays it.
-*  Closes the socket and exits.
-*  author: Michael Fahy
-*  Email:  fahy@chapman.edu
-*  Date:  2/17/2021
-*  version: 3.1
-*/
 
 class email {
 
-  public static void main(String[] argv) throws Exception {
-    // Get user input
-    BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-    System.out.print("Type the first sentence: ");
-    final String sentence1 = inFromUser.readLine();
+    public static void main(String[] argv) throws Exception {
+        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+        
+        System.out.print("From address: ");
+        final String fromAddress = inFromUser.readLine();
 
-    System.out.print("Type the second sentence: ");
-    final String sentence2 = inFromUser.readLine();
-    // Finished getting user input
+        System.out.print("To address: ");
+        final String toAddress = inFromUser.readLine();
 
-    // Connect to the server
-    Socket clientSocket = null;
+        System.out.print("Subject: ");
+        final String subject = inFromUser.readLine();
 
-    try {
-      clientSocket = new Socket("smtp.chapman.edu", 25);
-    } catch (Exception e) {
-      System.out.println("Failed to open socket connection");
-      System.exit(0);
+        System.out.println("Message body (end with a single '.' on a line by itself): ");
+        StringBuilder messageBody = new StringBuilder();
+        String line;
+        while (!(line = inFromUser.readLine()).equals(".")) {
+            messageBody.append(line).append("\n");
+        }
+
+        Socket clientSocket = null;
+        try {
+            clientSocket = new Socket("smtp.chapman.edu", 25);
+            PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(), true);
+            BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+            // Read welcome message from the server
+            System.out.println("Server: " + inFromServer.readLine());
+
+            // HELO command
+            sendCommand(outToServer, inFromServer, "HELO smtp.chapman.edu");
+
+            // MAIL FROM command
+            sendCommand(outToServer, inFromServer, "MAIL FROM: " + fromAddress);
+
+            // RCPT TO command
+            sendCommand(outToServer, inFromServer, "RCPT TO: " + toAddress);
+
+            // DATA command
+            sendCommand(outToServer, inFromServer, "DATA");
+
+            // Send email headers and body
+            outToServer.println("From: " + fromAddress);
+            outToServer.println("To: " + toAddress);
+            outToServer.println("Subject: " + subject);
+            outToServer.println(); // Separate header and body with a newline
+            outToServer.println(messageBody.toString());
+            outToServer.println(".");
+            System.out.println("Server: " + inFromServer.readLine()); // Read server response for end of data
+
+            // QUIT command
+            sendCommand(outToServer, inFromServer, "QUIT");
+
+            // Close the socket connection
+            clientSocket.close();
+            System.out.println("Email sent successfully.");
+        } catch (Exception e) {
+            System.out.println("Failed to open socket connection");
+            System.exit(0);
+        }
     }
-    PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(), true);
-    BufferedReader inFromServer =  new BufferedReader(
-        new InputStreamReader(clientSocket.getInputStream()));
 
-    // Exchange messages with the server
-    // Recive and display the Welcome Message
-    String welcomeMessage = inFromServer.readLine();
-    System.out.println("FROM SERVER:" + welcomeMessage);
-
-    // Send the first sentence and display the response
-    System.out.println(sentence1);
-    outToServer.println(sentence1);
-    String modifiedSentence = inFromServer.readLine();
-    System.out.println("FROM SERVER: " + modifiedSentence);
-
-    // Sent the second sentence and display the reponse
-    System.out.println(sentence2);
-    outToServer.println(sentence2);
-    modifiedSentence = inFromServer.readLine();
-    System.out.println("FROM SERVER: " + modifiedSentence);
-
-    // Close the socket connection
-    clientSocket.close();
-  }
+    private static void sendCommand(PrintWriter outToServer, BufferedReader inFromServer, String command) throws Exception {
+        System.out.println("Client: " + command);
+        outToServer.println(command);
+        System.out.println("Server: " + inFromServer.readLine());
+    }
 }
