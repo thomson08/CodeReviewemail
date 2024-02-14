@@ -81,7 +81,6 @@ class Email {
 
       // Close the socket
       clientSocket.close();
-      System.out.println("Finished: SUCCESS");
     } catch (Exception e) {
       System.out.println("An error occurred: " + e.getMessage());
       e.printStackTrace();
