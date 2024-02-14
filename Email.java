@@ -44,7 +44,8 @@ class Email {
       // Connect to the SMTP server
       Socket clientSocket = new Socket("smtp.chapman.edu", 25);
       PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(), true);
-      BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+      BufferedReader inFromServer = 
+      new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
       // Read the welcome message from the server
       System.out.println("SERVER: " + inFromServer.readLine());
@@ -64,8 +65,9 @@ class Email {
       outToServer.println("To: " + toUserName);
       System.out.println("CLIENT: Subject: " + subject);
       outToServer.println("Subject: " + subject);
-      outToServer.println(); // Send a blank line to separate headers from the body, this won't be visible in
-                             // console
+      outToServer.println(); 
+      // Send a blank line to separate headers from the body, this won't be visible in
+      // console
       // Print each line of the message body to the console before sending
       for (String bodyLine : messageBody.toString().split("\n")) {
         System.out.println("CLIENT: " + bodyLine);
@@ -86,7 +88,8 @@ class Email {
     }
   }
 
-  private static void sendCommand(PrintWriter outToServer, BufferedReader inFromServer, String command)
+  private static void sendCommand(PrintWriter outToServer,
+  BufferedReader inFromServer, String command)
       throws Exception {
     System.out.println("CLIENT: " + command);
     outToServer.println(command);
