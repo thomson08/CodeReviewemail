@@ -45,7 +45,7 @@ class Email {
       Socket clientSocket = new Socket("smtp.chapman.edu", 25);
       PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(), true);
       BufferedReader inFromServer = 
-      new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+          new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
       // Read the welcome message from the server
       System.out.println("SERVER: " + inFromServer.readLine());
@@ -73,7 +73,7 @@ class Email {
         System.out.println("CLIENT: " + bodyLine);
         outToServer.println(bodyLine);
       }
-      System.out.println("CLIENT: ."); // This line indicates the end of the email body to the SMTP server
+      System.out.println("CLIENT: ."); // This line indicates end of the email body to SMTP server
       outToServer.println(".");
       System.out.println("SERVER: " + inFromServer.readLine());
       // Send QUIT command
@@ -89,7 +89,7 @@ class Email {
   }
 
   private static void sendCommand(PrintWriter outToServer,
-  BufferedReader inFromServer, String command)
+      BufferedReader inFromServer, String command)
       throws Exception {
     System.out.println("CLIENT: " + command);
     outToServer.println(command);
