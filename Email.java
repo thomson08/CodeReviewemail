@@ -24,7 +24,7 @@ import java.net.Socket;
 */
 
 
-class email {
+class Email {
 
     public static void main(String[] argv) {
         try {
