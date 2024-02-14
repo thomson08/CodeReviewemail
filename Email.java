@@ -3,7 +3,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 /* SMTP Client-Server Program
-*   program prompts  the user to get appropriate information (e.g. "From" address, "To" address, Subject, message body) 
+*   program prompts  the user to get appropriate information 
+*	(e.g. "From" address, "To" address, Subject, message body) 
 *   and stores the information in variables.  
 
 *   Once the program recieves all the information from the user,
@@ -27,7 +28,7 @@ import java.net.Socket;
 class Email {
 
     public static void main(String[] argv) {
-        try {
+    try {
             BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
             
             System.out.print("Enter the 'From' address: ");
@@ -44,33 +45,33 @@ class Email {
             System.out.println("Enter the message body (end with a single '.' on a line by itself): ");
             StringBuilder messageBody = new StringBuilder();
             String line;
-            while (!(line = inFromUser.readLine()).equals(".")) {
-                messageBody.append(line).append("\n");
+     while (!(line = inFromUser.readLine()).equals(".")) {
+     messageBody.append(line).append("\n");
             }
 
             // Connect to the SMTP server
-            Socket clientSocket = new Socket("smtp.chapman.edu", 25);
-            PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(), true);
-            BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+     Socket clientSocket = new Socket("smtp.chapman.edu", 25);
+     PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(), true);
+     BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             
             // Read the welcome message from the server
-            System.out.println("SERVER: " + inFromServer.readLine());
+     System.out.println("SERVER: " + inFromServer.readLine());
             
             // Send HELO command to the server
-            sendCommand(outToServer, inFromServer, "HELO icd.chapman.edu");
+     sendCommand(outToServer, inFromServer, "HELO icd.chapman.edu");
 
             // Send MAIL FROM command
-            sendCommand(outToServer, inFromServer, "MAIL FROM: " + fromEmail);
+     sendCommand(outToServer, inFromServer, "MAIL FROM: " + fromEmail);
 
             // Send RCPT TO command
-            sendCommand(outToServer, inFromServer, "RCPT TO: " + toEmail);
+     sendCommand(outToServer, inFromServer, "RCPT TO: " + toEmail);
 
             // Send DATA command
-            sendCommand(outToServer, inFromServer, "DATA");
+     sendCommand(outToServer, inFromServer, "DATA");
             
 
-            System.out.println("CLIENT: From: " + fromUserName);
-            outToServer.println("From: " + fromUserName );
+     System.out.println("CLIENT: From: " + fromUserName);
+     outToServer.println("From: " + fromUserName);
 
             System.out.println("CLIENT: To: " + toUserName);
             outToServer.println("To: " + toUserName );
@@ -102,8 +103,8 @@ class Email {
     }
 
     private static void sendCommand(PrintWriter outToServer, BufferedReader inFromServer, String command) throws Exception {
-        System.out.println("CLIENT: " + command);
-        outToServer.println(command);
-        System.out.println("SERVER: " + inFromServer.readLine());
-    }
+   System.out.println("CLIENT: " + command);
+   outToServer.println(command);
+   System.out.println("SERVER: " + inFromServer.readLine());
+ }
 }
